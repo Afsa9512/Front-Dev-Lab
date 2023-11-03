@@ -10,7 +10,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ListarProductoComponent } from './components/productos/listar-producto/listar-producto.component';
 import { CrearProductoComponent } from './components/productos/crear-producto/crear-producto.component';
-import { ListarTipoClienteComponent } from './components/tipo-clientes/listar-tipo-cliente/listar-tipo-cliente.component';
 import { CargarImagenComponent } from './components/productos/crear-producto/cargar-imagen/cargar-imagen.component';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { CargarImagenComponent } from './components/productos/crear-producto/car
     ListarFacturaComponent,
     ListarProductoComponent,
     CrearProductoComponent,
-    ListarTipoClienteComponent,
     CargarImagenComponent
   ],
   imports: [

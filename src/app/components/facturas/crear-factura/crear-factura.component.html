@@ -75,7 +75,8 @@
                                 <td>{{reg.nombreProducto}}</td>
                                 <td>{{reg.precioUnitarioProducto}}</td>
                                 <td>{{reg.cantidadDeProducto}}</td>
-                                <td>{{reg.imagenProducto}}</td>
+                                <td style="text-align: center;"><img [src]="reg.imagenProducto" *ngIf="reg.imagenProducto !== ''" width="75px" height="75px">
+                                </td>
                                 <td>{{reg.subTotalProducto | number:'1.2-2' }}</td>
                             </tr>
                         </tbody>

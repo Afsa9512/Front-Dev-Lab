@@ -74,7 +74,7 @@ export class CrearProductoComponent {
           if (resp.error) {
               Swal.fire('Error al crear el Registro','Se presentó un error al crear el registro', 'error');
           } else {
-            this.router.navigateByUrl(`/farms`);
+            this.router.navigateByUrl(`/productosCreate/0`);
           }
         });
       }

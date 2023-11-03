@@ -25,7 +25,9 @@
             <input type=" text " class="form-control " id="ext" [(ngModel)]="producto.ext" name="ext" autocomplete="off" required>
             <span *ngIf="f.submitted && f.controls['ext'].errors" class="text-danger">* Obligatorio</span>
         </div>
+        
         <div class="form-group col-md-6 col-sm-12 col-xl-6 col-lg-6">
+            <br>
             <label for="imagenProducto">Imagen</label>
             <cargar-imagen (onUploadFinished)="uploadSignatureFinished($event)"></cargar-imagen>
         </div>

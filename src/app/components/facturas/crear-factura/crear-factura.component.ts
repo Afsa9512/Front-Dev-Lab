@@ -74,6 +74,7 @@ export class CrearFacturaComponent {
     this.api.getId('Productos/GetProductoById?idProducto=', this.facturaDetalle.idProducto).subscribe(
       (resp: any)=>{
         this.productoSeleccionado = resp;
+        console.log(resp);
       }
     );
   }
@@ -109,7 +110,7 @@ export class CrearFacturaComponent {
     if (this.productoSeleccionado.id > 0 && this.facturaDetalle.cantidadDeProducto > 0) {
       if (!this.validarProductoExiste()) {
         this.facturaDetalle.nombreProducto = this.productoSeleccionado.nombreProducto;
-        //this.facturaDetalle.imagenProducto = this.productoSeleccionado.imagenProducto;
+        this.facturaDetalle.imagenProducto = this.productoSeleccionado.imagenProducto;
         this.facturaDetalle.precioUnitarioProducto = this.productoSeleccionado.precioUnitario;
         this.facturaDetalle.subTotalProducto = this.facturaDetalle.cantidadDeProducto * this.productoSeleccionado.precioUnitario;
         this.regsDetail.push(this.facturaDetalle);
@@ -211,68 +212,6 @@ export class CrearFacturaComponent {
     });
   }
 
-
-  // Save Movement detail
-  SubmitDetail( form: NgForm){
-  //   if (form.invalid) {
-  //     Object.values(form.controls).forEach( ctrl => {
-  //       ctrl.markAsTouched();
-  //     });
-  //     Swal.fire(
-  //       {
-  //         title: 'Error',
-  //         html:    '<span class="text-primary">Hacen falta campos obligatorios</span>',
-  //         icon: 'error',
-  //         customClass: {
-  //           title: 'text-primary'
-  //         }
-  //       }
-  //     );
-  //     return;
-  //   }
-  //   Swal.fire(
-  //     {
-  //       title: 'Confirmar Guardar !!!',
-  //       html:    '<span class="text-primary">¿Está seguro de guardar el registro actual?</span>',
-  //       icon: 'question',
-  //       showCancelButton: true,
-  //       confirmButtonText: 'Guardar',
-  //       customClass: {
-  //         title: 'text-primary'
-  //       }
-  //     }
-  //   ).then((result)=> {
-  //     debugger;
-  //     if (result.isConfirmed) {
-  //       this.lote.codeLote = String(this.lote.codeLote);
-  //       this.lote.idFarm = this.farm.id_farm;
-  //       this.lote.loginUser = String(localStorage.getItem('userName'));
-  //       if (this.lote.idLote === ''){
-  //         this.api.post('lotes',this.lote).subscribe(
-  //           (resp: any)=>{
-  //           if (resp.error) {
-  //               Swal.fire('Error al crear el Registro','Se presentó un error al crear el registro', 'error');
-  //           } else {
-  //             this.buscar();
-  //           }
-  //         });
-  //       } else {
-  //         this.api.put('Lotes',this.lote).subscribe(
-  //           (resp: any)=>{
-  //           if (resp.error) {
-  //               Swal.fire('Error al actualizar el Registro','Se presentó un error al actualizar el registro', 'error');
-  //           } else {
-  //             this.buscar();
-  //           }
-  //         });
-  //       }
-  //       this.CleanDataDetail();
-  //     }
-  //   });
-  }
-
-
-  // Clean fields detail
   CleanDataDetail(){
     this.facturaDetalle = new FacturaDetalleModel();
   }
