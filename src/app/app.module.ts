@@ -8,12 +8,18 @@ import { ListarFacturaComponent } from './components/facturas/listar-factura/lis
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ListarProductoComponent } from './components/productos/listar-producto/listar-producto.component';
+import { CrearProductoComponent } from './components/productos/crear-producto/crear-producto.component';
+import { ListarTipoClienteComponent } from './components/tipo-clientes/listar-tipo-cliente/listar-tipo-cliente.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CrearFacturaComponent,
-    ListarFacturaComponent
+    ListarFacturaComponent,
+    ListarProductoComponent,
+    CrearProductoComponent,
+    ListarTipoClienteComponent
   ],
   imports: [
     HttpClientModule,

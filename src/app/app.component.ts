@@ -18,4 +18,20 @@ export class AppComponent {
   consultarFactura(){
       this.route.navigate(['facturasList']);
     }
+
+  registrarProducto(){
+      this.route.navigate(['productosCreate','0']);
+    }
+
+  consultarProducto(){
+      this.route.navigate(['productosList']);
+    }
+
+  registrarTipoCliente(){
+      this.route.navigate(['tipoClienteCreate','0']);
+    }
+
+  consultarTipoCliente(){
+      this.route.navigate(['tipoClienteList']);
+    }
 }
