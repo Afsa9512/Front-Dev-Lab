@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ImagenModel } from 'src/app/models/imagen-producto.model';
 import { ProductoModel } from 'src/app/models/producto.model';
 import { ApiService } from 'src/app/services/api.service';
 import Swal from 'sweetalert2';
@@ -8,7 +9,8 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-crear-producto',
   templateUrl: './crear-producto.component.html',
-  styleUrls: ['./crear-producto.component.scss']
+  styleUrls: ['./crear-producto.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CrearProductoComponent {
 
@@ -17,6 +19,8 @@ export class CrearProductoComponent {
   title= 'Productos';
   subtitle!: string;
   producto = new ProductoModel();
+
+  rutaImagen: string = '';
 
   constructor(private route: ActivatedRoute,
               private api: ApiService,
@@ -27,8 +31,11 @@ export class CrearProductoComponent {
     this.id = String(this.route.snapshot.paramMap.get('id'));
     if (this.id === '0' || this.id === '') {
       this.subtitle = 'CREANDO';
-      this.producto = new ProductoModel();
     }
+  }
+
+  uploadSignatureFinished = (event: ImagenModel) => {
+    this.producto.imagenProducto = event.rutaImagen;
   }
 
   Submit( form: NgForm){
@@ -62,7 +69,7 @@ export class CrearProductoComponent {
       }
     ).then((result)=> {
       if (result.isConfirmed) {
-        this.api.post('productos',this.producto).subscribe(
+        this.api.post('productos', this.producto).subscribe(
           (resp: any)=>{
           if (resp.error) {
               Swal.fire('Error al crear el Registro','Se presentó un error al crear el registro', 'error');

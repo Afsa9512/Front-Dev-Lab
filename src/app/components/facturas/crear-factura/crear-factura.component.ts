@@ -59,13 +59,13 @@ export class CrearFacturaComponent {
     this.api.get('Productos').subscribe(
       (resp: any)=>{
         this.productos = resp;
-        this.productos.unshift({
-          id: 0,
-          nombreProducto: 'Seleccione un producto...',
-          ext: '',
-          imagenProducto: '',
-          precioUnitario: 0
-        });
+        // this.productos.unshift({
+        //   id: 0,
+        //   nombreProducto: 'Seleccione un producto...',
+        //   ext: '',
+        //   imagenProducto: ,
+        //   precioUnitario: 0
+        // });
       }
     );
   }
@@ -109,7 +109,7 @@ export class CrearFacturaComponent {
     if (this.productoSeleccionado.id > 0 && this.facturaDetalle.cantidadDeProducto > 0) {
       if (!this.validarProductoExiste()) {
         this.facturaDetalle.nombreProducto = this.productoSeleccionado.nombreProducto;
-        this.facturaDetalle.imagenProducto = this.productoSeleccionado.imagenProducto;
+        //this.facturaDetalle.imagenProducto = this.productoSeleccionado.imagenProducto;
         this.facturaDetalle.precioUnitarioProducto = this.productoSeleccionado.precioUnitario;
         this.facturaDetalle.subTotalProducto = this.facturaDetalle.cantidadDeProducto * this.productoSeleccionado.precioUnitario;
         this.regsDetail.push(this.facturaDetalle);
@@ -164,6 +164,7 @@ export class CrearFacturaComponent {
     this.regsDetail = [];
   }
 
+ 
   Submit( form: NgForm){
     if (form.invalid) {
       Object.values(form.controls).forEach( ctrl => {
