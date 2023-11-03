@@ -1,0 +1,117 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <br>
+    <div class="row col-12">
+        <div class="form-group col-md-2 col-sm-2 col-lg-2 col-xl-2">
+            <p> {{ title | uppercase}}</p>
+        </div>
+        <div class="form-group col-md-3 col-sm-3 col-lg-3 col-xl-3">
+            <button type="button" (click)="NuevaFactura()" class="btn btn-primary ml-1 ">Nuevo </button>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <div class="row mt-1 col-md-12 col-sm-12 col-lg-12 col-xl-12">
+        <div class="form-group col-md-6 col-sm-12 col-xl-6 col-lg-6">
+            <label for="idCliente">Cliente</label>
+            <select class="form-control" [(ngModel)]="factura.idCliente" id="idCliente" name="idCliente" placeholder="Cliente" required>
+                <option *ngFor="let cli of clientes" [value]="cli.id">
+                    <span>{{ cli.razonSocial }}</span>
+                </option>
+            </select>
+            <span *ngIf="f.submitted && f.controls['idCliente'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+        <div class="form-group col-md-6 col-sm-12 col-xl-6 col-lg-6">
+            <label for="numeroFactura">Número de Factura</label>
+            <input type="number" class="form-control " id="numeroFactura" (blur)="OnBlurNumeroFactura($event)" [(ngModel)]="factura.numeroFactura" name="numeroFactura" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['numeroFactura'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>    
+    <br>
+    <div class="row mt-1 col-md-12 col-sm-12 col-lg-12 col-xl-12">
+        <div class="form-group col-md-6 col-sm-12 col-xl-6 col-lg-6">
+            <label>Archivo de Productos</label>
+              <input type="file" class="form-control" multiple="false" />
+        </div>
+    </div>    
+
+<div class="row col-12 animated fadeIn faster">
+    <div class="col">
+        <hr>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <h3><i class="fas fa-bars"></i> {{titleDetail | uppercase }}</h3>
+            </div>
+        </div>
+        <br>
+            <div class="row col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                <div class="form-group col-lg-4 col-md-4 col-xl-4 col-sm-12">
+                    <label for="idProducto">Producto</label>
+                    <select class="form-control" [(ngModel)]="facturaDetalle.idProducto" (change)="buscarProducto()" id="idProducto" name="idProducto" placeholder="Producto">
+                        <option *ngFor="let pro of productos" [value]="pro.id">
+                            <span>{{ pro.nombreProducto }}</span>
+                        </option>
+                    </select>
+                    <span *ngIf="f.submitted && f.controls['idProducto'].errors" class="text-danger">* Obligatorio</span>
+                </div>
+                <div class="form-group col-lg-4 col-md-4 col-xl-4 col-sm-12">
+                    <label for="cantidadDeProducto">Cantidad</label>
+                    <input type="number" class="form-control" id="cantidadDeProducto" [(ngModel)]="facturaDetalle.cantidadDeProducto" name="cantidadDeProducto" autocomplete="off">
+                    <span *ngIf="f.submitted && f.controls['cantidadDeProducto'].errors" class="text-danger">* Obligatorio</span>
+                </div>
+                <div class="form-group col-lg-4 col-md-4 col-xl-4 col-sm-12">
+                    <br>
+                    <button type="button" (click)="AgregarProducto()" class="btn btn-primary ml-1 ">Agregar Producto </button>
+                </div>
+            </div>
+            <br>
+            <div class="row col-xl-12 col-lg-12 col-sm-12 col-md-12">
+                <div class="form-group col-xl-12 col-lg-12 col-sm-12 col-md-12" style="overflow-y: auto;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" width="20%">Producto</th>
+                                <th scope="col" width="20%">Precio Unitario</th>
+                                <th scope="col" width="20%">Cantidad</th>
+                                <th scope="col" width="20%">Imagen</th>
+                                <th scope="col" width="20%">Totales</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let reg of regsDetail; let idx = index">                                
+                                <td>{{reg.nombreProducto}}</td>
+                                <td>{{reg.precioUnitarioProducto}}</td>
+                                <td>{{reg.cantidadDeProducto}}</td>
+                                <td>{{reg.imagenProducto}}</td>
+                                <td>{{reg.subTotalProducto | number:'1.2-2' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="second-table" style="text-align: center;">
+                <table>
+                  <tr>
+                    <td width="20%">Subtotal</td>
+                    <td width="20%">{{factura.subTotalFactura | number:'1.2-2' }}</td>
+                  </tr>
+                  <tr>
+                    <td width="20%">Impuestos (19%)</td>
+                    <td width="20%">{{factura.totalImpuesto | number:'1.2-2' }}</td>
+                  </tr>
+                  <tr>
+                    <td width="20%">Total</td>
+                    <td width="20%">{{factura.totalFactura | number:'1.2-2' }}</td>
+                  </tr>
+                </table>
+            </div>
+            <br>
+              
+            <div class="row col-md-12 col-sm-12 col-lg-12 col-xl-12 text-start">
+                <div class="form-group col-md-12 col-xl-12 col-sm-12 col-lg-12">
+                    <button type="submit " class="btn btn-success "><i class="fas fa-save "></i> Guardar</button>&nbsp;&nbsp;&nbsp;&nbsp;                    
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</form>
