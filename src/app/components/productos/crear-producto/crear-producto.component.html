@@ -14,9 +14,9 @@
             <span *ngIf="f.submitted && f.controls['nombreProducto'].errors" class="text-danger">* Obligatorio</span>
         </div>
         <div class="form-group col-md-6 col-sm-12 col-xl-6 col-lg-6">
-            <label for="description">Descripción</label>
-            <input type=" text " class="form-control " id="description" [(ngModel)]="producto.precioUnitario" name="description" autocomplete="off" required>
-            <span *ngIf="f.submitted && f.controls['description'].errors" class="text-danger">* Obligatorio</span>
+            <label for="precioUnitario">Precio Unitario</label>
+            <input type=" number " class="form-control " id="precioUnitario" [(ngModel)]="producto.precioUnitario" name="precioUnitario" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['precioUnitario'].errors" class="text-danger">* Obligatorio</span>
         </div>
     </div>
     <div class="row mt-1 col-md-12 col-sm-12 col-lg-12 col-xl-12">
